@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: httpd-deploy
+    environment: dev
+  name: httpd-deploy
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: httpd-deploy
+  template:
+    metadata:
+      labels:        
+        app: httpd-deploy
+        environment: dev
+    spec:
+      containers:
+      - image: httpd
+        name: httpd
+        resources:
+          requests:
+            cpu: 500m
+            memory: 512Mi
