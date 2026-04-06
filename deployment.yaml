@@ -23,3 +23,18 @@ spec:
           requests:
             cpu: 500m
             memory: 512Mi
+        readinessProbe:
+          httpGet:
+            path: "/health"
+            port: 8080
+        livenessProbe:
+          httpGet:
+            path: "/health"
+            port: 8080
+        env:
+        - name: environment
+          value: development
+        - name: project
+          value: Evelution
+        
+       
