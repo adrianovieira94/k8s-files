@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: nginx-statefull
+  name: nginx-statefull
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-statefull
+  template:
+    metadata:
+      labels:
+        app: nginx-statefull
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        volumeMounts:
+          - name: local-path-nginx
+            mountPath: "/usr/share/nginx/html"
+  volumeClaimTemplates:
+  - metadata:
+      name: local-path-nginx
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "local-path"
+      resources:
+        requests:
+          storage: 1Gi
